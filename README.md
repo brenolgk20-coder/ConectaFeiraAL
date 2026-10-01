@@ -10,23 +10,22 @@ Aplicação web acadêmica para divulgar feirinhas em Alagoas. O projeto começa
 ## Como executar no Windows / VS Code
 
 1. Extraia a pasta `ConectaFeiraAL` e abra essa pasta no VS Code.
-2. No terminal integrado, crie e ative o ambiente virtual:
+2. No terminal integrado, crie o ambiente virtual:
 
    ```powershell
    py -m venv .venv
-   .venv\Scripts\Activate.ps1
    ```
 
-3. Instale as dependências:
+3. Instale as dependências usando o Python desse ambiente (não é preciso ativá-lo):
 
    ```powershell
-   py -m pip install -r requirements.txt
+   .\.venv\Scripts\python.exe -m pip install -r requirements.txt
    ```
 
-4. Inicie o servidor:
+4. Inicie o servidor usando o mesmo Python:
 
    ```powershell
-   uvicorn app.main:app --reload
+   .\.venv\Scripts\python.exe -m uvicorn app.main:app --reload
    ```
 
 5. Abra `http://127.0.0.1:8000` no navegador.
