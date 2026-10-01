@@ -55,3 +55,8 @@ Fora deste primeiro corte: notificações e lembretes, avaliações/comentários
 ## Documentação do Projeto Integrador
 
 A documentação acadêmica do projeto está em [`docs/Projeto_Integrador.md`](docs/Projeto_Integrador.md). Ela reúne a descrição do projeto, o escopo, os requisitos, os stakeholders, a metodologia, os riscos, o plano e as referências. Antes de enviar, confira se o texto e o cronograma correspondem ao trabalho realizado.
+
+
+## Apresentação em vídeo
+
+O vídeo de apresentação do projeto será publicado no YouTube. O link será incluído aqui após a publicação.
