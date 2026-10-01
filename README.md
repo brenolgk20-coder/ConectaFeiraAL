@@ -59,4 +59,4 @@ A documentação acadêmica do projeto está em [`docs/Projeto_Integrador.md`](d
 
 ## Apresentação em vídeo
 
-O vídeo de apresentação do projeto será publicado no YouTube. O link será incluído aqui após a publicação.
+Assista ao vídeo de apresentação do ConectaFeira AL no YouTube: [Ver apresentação](https://www.youtube.com/watch?v=AaumSNsqY6Y).
