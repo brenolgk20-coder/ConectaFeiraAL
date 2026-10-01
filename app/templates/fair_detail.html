@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ fair.name }} · ConectaFeira AL{% endblock %}
+{% block content %}
+<p class="back-link"><a href="/">← Voltar às feiras</a></p>
+<article class="detail panel">
+  <div class="card-top"><span class="tag">{{ fair.category }}</span><span class="date-chip">{{ fair.event_date.strftime('%d/%m/%Y') }}</span></div>
+  <h1>{{ fair.name }}</h1><p class="detail-description">{{ fair.description }}</p>
+  <div class="detail-facts"><div><small>Quando</small><strong>{{ fair.event_date.strftime('%d/%m/%Y') }} · {{ fair.start_time }}–{{ fair.end_time }}</strong></div><div><small>Onde</small><strong>{{ fair.address }}, {{ fair.city }}</strong></div><div><small>Organização</small><strong>{{ fair.organizer.name }}</strong></div></div>
+  {% if fair.latitude is not none and fair.longitude is not none %}<div id="detail-map" class="map" data-lat="{{ fair.latitude }}" data-lng="{{ fair.longitude }}" data-title="{{ fair.name }}"></div>{% endif %}
+  {% if user and user.id == fair.organizer_id %}<div class="form-actions"><a class="button" href="/feiras/{{ fair.id }}/editar">Editar feira</a><a class="button button-quiet" href="/minhas-feiras">Gerenciar minhas feiras</a></div>{% endif %}
+</article>
+{% endblock %}

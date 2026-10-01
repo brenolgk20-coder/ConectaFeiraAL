@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}ConectaFeira AL{% endblock %}</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">ConectaFeira <span>AL</span></a>
+    <nav>
+      <a href="/">Explorar feiras</a>
+      {% if user %}
+        {% if user.role == 'organizador' %}<a href="/minhas-feiras">Minhas feiras</a><a class="button button-small" href="/feiras/nova">Cadastrar feira</a>{% endif %}
+        <span class="nav-user">Olá, {{ user.name }}</span>
+        <form method="post" action="/sair"><button class="link-button" type="submit">Sair</button></form>
+      {% else %}
+        <a href="/login">Entrar</a><a class="button button-small" href="/criar-conta">Criar conta</a>
+      {% endif %}
+    </nav>
+  </header>
+  <main class="container">{% block content %}{% endblock %}</main>
+  <footer class="footer">ConectaFeira AL · Feirinhas e cultura local de Alagoas</footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="{{ url_for('static', path='/map.js') }}"></script>
+</body>
+</html>

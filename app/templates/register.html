@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Criar conta · ConectaFeira AL{% endblock %}
+{% block content %}
+<section class="auth-wrap"><p class="eyebrow">Faça parte da comunidade</p><h1>Criar conta</h1><p class="muted">Escolha como quer participar.</p>
+  {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+  <form class="panel form-stack" method="post" action="/criar-conta">
+    <label>Nome completo<input name="name" autocomplete="name" maxlength="100" required></label>
+    <label>E-mail<input name="email" type="email" autocomplete="email" maxlength="180" required></label>
+    <label>Senha<input name="password" type="password" autocomplete="new-password" minlength="8" required><small>Use pelo menos 8 caracteres.</small></label>
+    <label>Quero participar como<select name="role" required><option value="visitante">Visitante</option><option value="organizador">Organizador</option></select></label>
+    <button class="button" type="submit">Criar conta</button>
+  </form>
+  <p class="auth-foot">Já tem conta? <a href="/login">Entrar</a></p>
+</section>
+{% endblock %}

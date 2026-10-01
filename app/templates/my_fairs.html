@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Minhas feiras · ConectaFeira AL{% endblock %}
+{% block content %}
+<section class="page-heading row-heading"><div><p class="eyebrow">Área do organizador</p><h1>Minhas feiras</h1><p class="muted">Gerencie seus eventos cadastrados.</p></div><a class="button" href="/feiras/nova">+ Cadastrar feira</a></section>
+{% if fairs %}<section class="panel table-panel"><div class="table-head"><span>Feira</span><span>Data</span><span>Local</span><span>Ações</span></div>
+  {% for fair in fairs %}<div class="table-row"><div><strong>{{ fair.name }}</strong><small>{{ fair.category }}</small></div><span>{{ fair.event_date.strftime('%d/%m/%Y') }}</span><span>{{ fair.city }}</span><div class="actions"><a href="/feiras/{{ fair.id }}">Ver</a><a href="/feiras/{{ fair.id }}/editar">Editar</a><form method="post" action="/feiras/{{ fair.id }}/excluir" onsubmit="return confirm('Excluir esta feira?')"><button class="danger-link" type="submit">Excluir</button></form></div></div>{% endfor %}
+</section>{% else %}<div class="empty-state"><div class="empty-icon">✳</div><h3>Você ainda não cadastrou feiras</h3><p>Cadastre seu primeiro evento para divulgá-lo aos visitantes.</p><a class="button" href="/feiras/nova">Cadastrar feira</a></div>{% endif %}
+{% endblock %}

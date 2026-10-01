@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% set editing = fair is not none %}
+{% block title %}{% if editing %}Editar feira{% else %}Cadastrar feira{% endif %} · ConectaFeira AL{% endblock %}
+{% block content %}
+<section class="page-heading"><p class="eyebrow">Área do organizador</p><h1>{% if editing %}Editar feira{% else %}Cadastrar uma feira{% endif %}</h1><p class="muted">Preencha os detalhes e marque o local no mapa.</p></section>
+{% if error %}<div class="alert">{{ error }}</div>{% endif %}
+<form class="panel fair-form" method="post" action="{% if editing %}/feiras/{{ fair.id }}/editar{% else %}/feiras/nova{% endif %}">
+  <div class="form-grid">
+    <label class="wide">Nome da feira<input name="name" maxlength="140" value="{{ fair.name if editing else '' }}" required></label>
+    <label>Categoria<select name="category" required>{% for item in categories %}<option value="{{ item }}" {% if editing and fair.category == item %}selected{% endif %}>{{ item }}</option>{% endfor %}</select></label>
+    <label>Data<input type="date" name="event_date" value="{{ fair.event_date.isoformat() if editing else '' }}" required></label>
+    <label>Horário de início<input type="time" name="start_time" value="{{ fair.start_time if editing else '' }}" required></label>
+    <label>Horário de encerramento<input type="time" name="end_time" value="{{ fair.end_time if editing else '' }}" required></label>
+    <label class="wide">Descrição<textarea name="description" rows="4" required>{{ fair.description if editing else '' }}</textarea></label>
+    <label>Endereço<input name="address" maxlength="220" value="{{ fair.address if editing else '' }}" required></label>
+    <label>Cidade<input name="city" maxlength="100" value="{{ fair.city if editing else 'Maceió' }}" required></label>
+  </div>
+  <div class="map-label"><div><h3>Localização no mapa</h3><p class="muted">Clique no mapa para marcar o local da feira.</p></div><span class="map-hint">OpenStreetMap</span></div>
+  <div id="map-picker" class="map" data-lat="{{ fair.latitude if editing and fair.latitude is not none else '' }}" data-lng="{{ fair.longitude if editing and fair.longitude is not none else '' }}"></div>
+  <div class="form-grid coordinate-grid"><label>Latitude<input id="latitude" name="latitude" value="{{ fair.latitude if editing and fair.latitude is not none else '' }}" readonly></label><label>Longitude<input id="longitude" name="longitude" value="{{ fair.longitude if editing and fair.longitude is not none else '' }}" readonly></label></div>
+  <div class="form-actions"><a class="button button-quiet" href="/minhas-feiras">Cancelar</a><button class="button" type="submit">{% if editing %}Salvar alterações{% else %}Cadastrar feira{% endif %}</button></div>
+</form>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Explorar feiras · ConectaFeira AL{% endblock %}
+{% block content %}
+<section class="hero">
+  <div><p class="eyebrow">Descubra o que acontece perto de você</p><h1>Feirinhas de Alagoas,<br><span>perto de você.</span></h1><p class="muted">Encontre artesanato, sabores, moda e cultura local.</p></div>
+  <div class="hero-mark" aria-hidden="true">✳</div>
+</section>
+<section class="panel filter-panel">
+  <form class="filters" method="get" action="/">
+    <label>Buscar<input name="q" value="{{ filters.q }}" placeholder="Nome ou descrição"></label>
+    <label>Categoria<select name="categoria"><option value="">Todas</option>{% for item in categories %}<option value="{{ item }}" {% if filters.categoria == item %}selected{% endif %}>{{ item }}</option>{% endfor %}</select></label>
+    <label>Cidade ou endereço<input name="cidade" value="{{ filters.cidade }}" placeholder="Ex.: Maceió"></label>
+    <label>Data<input type="date" name="data" value="{{ filters.data }}"></label>
+    <button class="button" type="submit">Buscar</button>
+  </form>
+</section>
+<div class="section-heading"><div><p class="eyebrow">Agenda</p><h2>Próximas feirinhas</h2></div><span class="count">{{ fairs|length }} evento(s)</span></div>
+{% if fairs %}
+  <section class="fair-grid">
+    {% for fair in fairs %}
+    <article class="fair-card">
+      <div class="card-top"><span class="tag">{{ fair.category }}</span><span class="date-chip">{{ fair.event_date.strftime('%d/%m/%Y') }}</span></div>
+      <h3><a href="/feiras/{{ fair.id }}">{{ fair.name }}</a></h3>
+      <p class="muted clamp">{{ fair.description }}</p>
+      <p class="place">⌖ {{ fair.city }} · {{ fair.address }}</p>
+      <p class="time">{{ fair.start_time }}–{{ fair.end_time }}</p>
+      <a class="text-link" href="/feiras/{{ fair.id }}">Ver detalhes →</a>
+    </article>
+    {% endfor %}
+  </section>
+  <section class="map-section"><div class="section-heading"><div><p class="eyebrow">Localização</p><h2>Veja no mapa</h2></div></div>
+    <div id="public-map" class="map" aria-label="Mapa das feirinhas"></div>
+    <div class="map-points">{% for fair in fairs %}{% if fair.latitude is not none and fair.longitude is not none %}<span data-lat="{{ fair.latitude }}" data-lng="{{ fair.longitude }}" data-title="{{ fair.name }}" data-url="/feiras/{{ fair.id }}"></span>{% endif %}{% endfor %}</div>
+  </section>
+{% else %}
+  <div class="empty-state"><div class="empty-icon">✳</div><h3>Nenhuma feira encontrada</h3><p>Experimente mudar os filtros ou volte mais tarde.</p></div>
+{% endif %}
+{% endblock %}
